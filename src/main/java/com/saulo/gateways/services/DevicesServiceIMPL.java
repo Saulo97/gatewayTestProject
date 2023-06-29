@@ -3,7 +3,7 @@ package com.saulo.gateways.services;
 import com.saulo.gateways.dto.DeviceDTO;
 import com.saulo.gateways.models.Device;
 import com.saulo.gateways.repositories.DevicesRepository;
-import com.saulo.gateways.validations.DeviceNotFoundException;
+import com.saulo.gateways.custom_exceptions.DeviceNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -32,9 +32,10 @@ public class DevicesServiceIMPL implements DevicesService{
     }
 
     @Override
-    public void deleteDeviceById(Long id) {
+    public DeviceDTO deleteDeviceById(Long id) throws DeviceNotFoundException {
+        Device targetDevice = devicesRepository.findById(id).orElseThrow(()-> new DeviceNotFoundException("Device Not Found"));
         devicesRepository.deleteById(id);
-        return;
+        return targetDevice.mapToDTO();
     }
 
     @Override
