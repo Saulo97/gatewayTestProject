@@ -4,7 +4,6 @@ import com.saulo.gateways.custom_exceptions.GatewayNotFoundException;
 import com.saulo.gateways.dto.GatewayDTO;
 import com.saulo.gateways.models.Gateway;
 import com.saulo.gateways.repositories.GatewaysRepository;
-import jakarta.persistence.EntityNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

@@ -2,6 +2,8 @@ package com.saulo.gateways;
 
 import com.fasterxml.jackson.core.JsonParseException;
 import com.fasterxml.jackson.databind.exc.InvalidFormatException;
+import com.saulo.gateways.custom_exceptions.DeviceNotFoundException;
+import com.saulo.gateways.custom_exceptions.GatewayNotFoundException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.converter.HttpMessageNotReadableException;
 import org.springframework.validation.FieldError;
@@ -47,6 +49,16 @@ public class HandlerException {
         }
         //
         errorMap.put(field, error);
+        return errorMap;
+    }
+
+    @ExceptionHandler({DeviceNotFoundException.class, GatewayNotFoundException.class})
+    @ResponseStatus(HttpStatus.BAD_REQUEST)
+    public Map<String, String> handleEntityNotFound(Exception exception){
+        Map<String, String> errorMap=new HashMap<>();
+        String message= exception.getMessage();
+        String error = "Error";
+        errorMap.put(error,message);
         return errorMap;
     }
 }
