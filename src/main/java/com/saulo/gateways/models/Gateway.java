@@ -26,7 +26,7 @@ public class Gateway {
     @NotEmpty(message = "Este campo no debe ser null")
     @Pattern(regexp = "(([0-9]|[1-9][0-9]|1[0-9][0-9]|2[0-4][0-9]|25[0-5])\\.{3}([0-9]|[1-9][0-9]|1[0-9][0-9]|2[0-4][0-9]|25[0-5]))",message = "El valor proporcionado no es un ipv4")
     public String IPv4;
-    @OneToMany(mappedBy = "gateway", cascade = CascadeType.ALL, orphanRemoval = true,fetch = FetchType.EAGER)
+    @OneToMany(mappedBy = "gateway", cascade = CascadeType.ALL, orphanRemoval = true)
     public List<Device> devices;
 
     public Long getId() {
