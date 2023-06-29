@@ -1,5 +1,6 @@
 package com.saulo.gateways.models;
 
+import com.saulo.gateways.dto.DeviceDTO;
 import com.saulo.gateways.validations.DeviceStatusValidation;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
@@ -79,5 +80,15 @@ public class Device {
 
     public void setGateway(Gateway gateway) {
         this.gateway = gateway;
+    }
+
+    public DeviceDTO mapToDTO(){
+        DeviceDTO deviceDTO = new DeviceDTO();
+        deviceDTO.setId(this.getId());
+        deviceDTO.setUID(this.getUID());
+        deviceDTO.setVendor(this.getVendor());
+        deviceDTO.setCreatedDate(this.getCreatedDate());
+        deviceDTO.setStatus(this.getStatus());
+        return deviceDTO;
     }
 }

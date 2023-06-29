@@ -1,10 +1,13 @@
 package com.saulo.gateways.models;
 
+import com.saulo.gateways.dto.DeviceDTO;
+import com.saulo.gateways.dto.GatewayDTO;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.Pattern;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -64,5 +67,19 @@ public class Gateway {
 
     public void setDevices(List<Device> devices) {
         this.devices = devices;
+    }
+
+    public GatewayDTO maptoDTO(){
+        GatewayDTO gatewayDTO = new GatewayDTO();
+        gatewayDTO.setId(this.getId());
+        gatewayDTO.setName(this.getName());
+        gatewayDTO.setIPv4(this.getIPv4());
+        gatewayDTO.setSerialNumber(this.getSerialNumber());
+        List<Device> deviceList = this.getDevices();
+        List<DeviceDTO> deviceDTOList = new ArrayList<DeviceDTO>();
+        deviceList.forEach(device->{
+            deviceDTOList.add(device.mapToDTO());
+        });
+        return  gatewayDTO;
     }
 }
