@@ -11,7 +11,7 @@ import java.util.List;
 public interface DevicesService {
     public List<DeviceDTO> getAllDevices();
     public DeviceDTO getDeiceById(Long id) throws DeviceNotFoundException;
-    public DeviceDTO createDevice(Device device);
+    public DeviceDTO createDevice(Device device, Long id);
     public DeviceDTO deleteDeviceById(Long id) throws DeviceNotFoundException;
     public List<DeviceDTO> getDevicesByGatewayId(Long id);
 }

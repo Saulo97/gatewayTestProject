@@ -26,7 +26,7 @@ public class DevicesServiceIMPL implements DevicesService{
     }
 
     @Override
-    public DeviceDTO createDevice(Device device) {
+    public DeviceDTO createDevice(Device device, Long id) {
         Device newDevice = devicesRepository.save(device);
         return newDevice.mapToDTO();
     }
