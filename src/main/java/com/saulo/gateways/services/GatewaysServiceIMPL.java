@@ -2,11 +2,13 @@ package com.saulo.gateways.services;
 
 import com.saulo.gateways.custom_exceptions.GatewayNotFoundException;
 import com.saulo.gateways.dto.GatewayDTO;
+import com.saulo.gateways.models.Device;
 import com.saulo.gateways.models.Gateway;
 import com.saulo.gateways.repositories.GatewaysRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 @Service
 public class GatewaysServiceIMPL implements GatewaysService{
@@ -24,6 +26,8 @@ public class GatewaysServiceIMPL implements GatewaysService{
     }
     @Override
     public GatewayDTO createGateway(Gateway gateway) {
+        List<Device> emptyList=new ArrayList<Device>();
+        gateway.setDevices(emptyList);
         Gateway newGateway = gatewaysRepository.save(gateway);
         return newGateway.maptoDTO();
     }

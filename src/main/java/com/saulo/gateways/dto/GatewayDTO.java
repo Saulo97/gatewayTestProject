@@ -6,7 +6,7 @@ public class GatewayDTO {
     public Long id;
     public String serialNumber;
     public String name;
-    public String IPv4;
+    public String ipv4;
     public List<DeviceDTO> devices;
 
     public Long getId() {
@@ -34,11 +34,11 @@ public class GatewayDTO {
     }
 
     public String getIPv4() {
-        return IPv4;
+        return ipv4;
     }
 
-    public void setIPv4(String IPv4) {
-        this.IPv4 = IPv4;
+    public void setIPv4(String ipv4) {
+        this.ipv4 = ipv4;
     }
 
     public List<DeviceDTO> getDevices() {

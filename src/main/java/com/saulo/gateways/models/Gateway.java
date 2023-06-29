@@ -24,8 +24,8 @@ public class Gateway {
     public String name;
     @NotBlank(message = "Este campo no debe estar vacio")
     @NotEmpty(message = "Este campo no debe ser null")
-    @Pattern(regexp = "(([0-9]|[1-9][0-9]|1[0-9][0-9]|2[0-4][0-9]|25[0-5])\\.{3}([0-9]|[1-9][0-9]|1[0-9][0-9]|2[0-4][0-9]|25[0-5]))",message = "El valor proporcionado no es un ipv4")
-    public String IPv4;
+    @Pattern(regexp = "(([0-9]|[1-9][0-9]|1[0-9][0-9]|2[0-4][0-9]|25[0-5])\\.){3}([0-9]|[1-9][0-9]|1[0-9][0-9]|2[0-4][0-9]|25[0-5])",message = "El valor proporcionado no es un ipv4")
+    public String ipv4;
     @OneToMany(mappedBy = "gateway", cascade = CascadeType.ALL, orphanRemoval = true)
     public List<Device> devices;
 
@@ -54,11 +54,11 @@ public class Gateway {
     }
 
     public String getIPv4() {
-        return IPv4;
+        return ipv4;
     }
 
-    public void setIPv4(String IPv4) {
-        this.IPv4 = IPv4;
+    public void setIPv4(String ipv4) {
+        this.ipv4 = ipv4;
     }
 
     public List<Device> getDevices() {
@@ -76,7 +76,7 @@ public class Gateway {
         gatewayDTO.setIPv4(this.getIPv4());
         gatewayDTO.setSerialNumber(this.getSerialNumber());
         List<Device> deviceList = this.getDevices();
-        List<DeviceDTO> deviceDTOList = new ArrayList<DeviceDTO>();
+        List<DeviceDTO> deviceDTOList = new ArrayList<>();
         deviceList.forEach(device->{
             deviceDTOList.add(device.mapToDTO());
         });

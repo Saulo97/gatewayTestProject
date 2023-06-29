@@ -57,7 +57,7 @@ public class HandlerException {
     public Map<String, String> handleEntityNotFound(Exception exception){
         Map<String, String> errorMap=new HashMap<>();
         String message= exception.getMessage();
-        String error = "Error";
+        String error = "Element";
         errorMap.put(error,message);
         return errorMap;
     }
