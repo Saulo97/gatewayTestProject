@@ -32,7 +32,7 @@ public class Device {
     @NotBlank(message = "Este campo no debe estar vacio")
     @NotEmpty(message = "Este campo no debe ser null")
     private String status;
-    @ManyToOne()
+    @ManyToOne(fetch = FetchType.LAZY)
     private Gateway gateway;
     public void setId(Long id) {
         this.id = id;
