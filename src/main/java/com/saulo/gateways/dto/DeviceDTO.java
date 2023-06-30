@@ -4,7 +4,7 @@ import java.util.Date;
 
 public class DeviceDTO {
     public Long id;
-    public Long UID;
+    public Long uid;
     public String vendor;
     public Date createdDate;
     public String status;
@@ -18,11 +18,11 @@ public class DeviceDTO {
     }
 
     public Long getUID() {
-        return UID;
+        return uid;
     }
 
-    public void setUID(Long UID) {
-        this.UID = UID;
+    public void setUID(Long uid) {
+        this.uid = uid;
     }
 
     public String getVendor() {

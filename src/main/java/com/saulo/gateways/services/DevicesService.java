@@ -1,5 +1,6 @@
 package com.saulo.gateways.services;
 
+import com.saulo.gateways.custom_exceptions.GatewayNotFoundException;
 import com.saulo.gateways.dto.DeviceDTO;
 import com.saulo.gateways.models.Device;
 import com.saulo.gateways.custom_exceptions.DeviceNotFoundException;
@@ -11,7 +12,7 @@ import java.util.List;
 public interface DevicesService {
     public List<DeviceDTO> getAllDevices();
     public DeviceDTO getDeiceById(Long id) throws DeviceNotFoundException;
-    public DeviceDTO createDevice(Device device, Long id);
+    public DeviceDTO createDevice(Device device, Long id) throws GatewayNotFoundException;
     public DeviceDTO deleteDeviceById(Long id) throws DeviceNotFoundException;
     public List<DeviceDTO> getDevicesByGatewayId(Long id);
 }
