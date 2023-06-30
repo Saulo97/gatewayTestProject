@@ -28,7 +28,7 @@ public class GatewaysController {
     @RequestMapping(value = "/createGateway", method = RequestMethod.POST)
     public ResponseEntity<GatewayDTO> createGateway(@Valid @RequestBody Gateway gateway){
         GatewayDTO savedGateway = gatewaysService.createGateway(gateway);
-        return ResponseEntity.status(HttpStatus.ACCEPTED).body(savedGateway);
+        return ResponseEntity.status(HttpStatus.CREATED).body(savedGateway);
     }
 
     @GetMapping
@@ -42,7 +42,7 @@ public class GatewaysController {
     @RequestMapping(value = "/deleteGateway/{id}", method = RequestMethod.DELETE)
     public ResponseEntity<GatewayDTO> deleteGatewayById(@PathVariable Long id) throws GatewayNotFoundException {
         GatewayDTO deletedGateway = gatewaysService.deleteGatewayById(id);
-        return ResponseEntity.status(HttpStatus.ACCEPTED).body(deletedGateway);
+        return ResponseEntity.status(HttpStatus.CREATED).body(deletedGateway);
     }
 
 
