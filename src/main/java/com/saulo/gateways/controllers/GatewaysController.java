@@ -14,6 +14,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/Gateways")
+@CrossOrigin(methods = {RequestMethod.POST,RequestMethod.GET,RequestMethod.DELETE})
 public class GatewaysController {
     @Autowired
     GatewaysService gatewaysService;

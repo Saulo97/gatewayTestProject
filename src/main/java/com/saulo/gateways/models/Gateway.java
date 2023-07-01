@@ -16,15 +16,15 @@ public class Gateway {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     public Long id;
-    @NotBlank(message = "Este campo no debe estar vacio")
-    @NotEmpty(message = "Este campo no debe ser null")
+    @NotBlank(message = "Serial Number:Este campo no debe estar vacio")
+    @NotEmpty(message = "Serial Number:Este campo no debe ser null")
     public String serialNumber;
-    @NotBlank(message = "Este campo no debe estar vacio")
-    @NotEmpty(message = "Este campo no debe ser null")
+    @NotBlank(message = "Name:Este campo no debe estar vacio")
+    @NotEmpty(message = "Name:Este campo no debe ser null")
     public String name;
-    @NotBlank(message = "Este campo no debe estar vacio")
-    @NotEmpty(message = "Este campo no debe ser null")
-    @Pattern(regexp = "(([0-9]|[1-9][0-9]|1[0-9][0-9]|2[0-4][0-9]|25[0-5])\\.){3}([0-9]|[1-9][0-9]|1[0-9][0-9]|2[0-4][0-9]|25[0-5])",message = "El valor proporcionado no es un ipv4")
+    @NotBlank(message = "IP:Este campo no debe estar vacio")
+    @NotEmpty(message = "IP:Este campo no debe ser null")
+    @Pattern(regexp = "(([0-9]|[1-9][0-9]|1[0-9][0-9]|2[0-4][0-9]|25[0-5])\\.){3}([0-9]|[1-9][0-9]|1[0-9][0-9]|2[0-4][0-9]|25[0-5])",message = "IP:El valor proporcionado no es un ipv4")
     public String ipv4;
     @OneToMany(mappedBy = "gateway", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.EAGER)
     public List<Device> devices;

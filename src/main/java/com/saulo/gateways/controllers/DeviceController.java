@@ -16,6 +16,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/Gateways")
+@CrossOrigin(methods = {RequestMethod.POST,RequestMethod.GET,RequestMethod.DELETE})
 public class DeviceController {
     @Autowired
     DevicesService devicesService;

@@ -16,16 +16,16 @@ public class Device {
     private Long id;
     //@NotBlank(message = "Este campo no debe estar vacio")
     //@NotEmpty(message = "Este campo no debe ser null")
-    @NotNull(message = "Este campo no debe ser nulo")
+    @NotNull(message = "UID:Este campo no debe ser nulo")
     private Long uid;
-    @NotBlank(message = "Este campo no debe estar vacio")
-    @NotEmpty(message = "Este campo no debe ser null")
+    @NotBlank(message = "Vendor:Este campo no debe estar vacio")
+    @NotEmpty(message = "Vendor:Este campo no debe ser null")
     private String vendor;
     @Temporal(TemporalType.DATE)
     private Date createdDate;
     @DeviceStatusValidation
-    @NotBlank(message = "Este campo no debe estar vacio")
-    @NotEmpty(message = "Este campo no debe ser null")
+    @NotBlank(message = "Status:Este campo no debe estar vacio")
+    @NotEmpty(message = "Stsus:Este campo no debe ser null")
     private String status;
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "gateway_id")

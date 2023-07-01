@@ -27,7 +27,8 @@ public class HandlerException {
         Map<String, String> errorMap = new HashMap<>();
         List<FieldError> errorList = exception.getBindingResult().getFieldErrors();
         errorList.forEach(error->{
-            errorMap.put(error.getField(),error.getDefaultMessage());
+            //errorMap.put(error.getField(),error.getDefaultMessage());
+            errorMap.put("error",error.getDefaultMessage());
         });
         return errorMap;
     }
@@ -57,7 +58,7 @@ public class HandlerException {
     public Map<String, String> handleEntityNotFound(Exception exception){
         Map<String, String> errorMap=new HashMap<>();
         String message= exception.getMessage();
-        String error = "Element";
+        String error = "error";
         errorMap.put(error,message);
         return errorMap;
     }
