@@ -1,7 +1,9 @@
 package com.saulo.gateways.dto;
 
-import java.util.Date;
+import lombok.ToString;
 
+import java.util.Date;
+@ToString
 public class DeviceDTO {
     public Long id;
     public Long uid;

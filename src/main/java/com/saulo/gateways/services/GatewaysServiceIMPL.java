@@ -5,6 +5,7 @@ import com.saulo.gateways.dto.GatewayDTO;
 import com.saulo.gateways.models.Device;
 import com.saulo.gateways.models.Gateway;
 import com.saulo.gateways.repositories.GatewaysRepository;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

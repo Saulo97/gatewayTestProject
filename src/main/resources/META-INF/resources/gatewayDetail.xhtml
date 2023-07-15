@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui">
+
+<h:head>
+    <title>GatewayDetails</title>
+    <link rel="stylesheet" href="https://unpkg.com/primeflex@^3/primeflex.css"/>
+</h:head>
+<h:body>
+    <div class="card crud-demo">
+        <h:form id="form-devices">
+            <p:growl id="messages" showDetail="true"/>
+            <p:toolbar>
+                <p:toolbarGroup align="left">
+                    <p:linkButton outcome="index" value="Back" icon="pi pi-arrow-left"
+                                  class="ui-button-success" style="margin-right: .5rem">
+                    </p:linkButton>
+                    <p:commandButton value="Add Device" icon="pi pi-plus" actionListener="#{primeGatewayDetailsController.openNewDevice}"
+                                     styleClass="ui-button-success" oncomplete="PF('addDeviceDialog').show()" update=":dialogs:add-device-content">
+                    </p:commandButton>
+                </p:toolbarGroup>
+            </p:toolbar>
+            <p:dataTable id="dt-devices" widgetVar="dtDevices" var="device" value="#{primeGatewayDetailsController.devices}"
+                         reflow="true" styleClass="table" selection="#{primeGatewayDetailsController.selectedDevice}"
+            >
+                <f:facet name="header">
+                    <div class="table-header">
+                        <span style="font-weight: bold">GATEWAYS DETAILS</span>
+                    </div>
+                    <div class="card crud-demo">
+                        <p:panelGrid columns="2" layout="grid" styleClass="showcase-text-align-center">
+                            <h:outputText value="Name:"/>
+                            <h:outputText value="#{primeGatewayDetailsController.gatewayDTO.name}"/>
+
+                            <h:outputText value="Serial Number:"/>
+                            <h:outputText value="#{primeGatewayDetailsController.gatewayDTO.serialNumber}"/>
+
+                            <h:outputText value="IPv4:"/>
+                            <h:outputText value="#{primeGatewayDetailsController.gatewayDTO.IPv4}"/>
+
+                            <h:outputText value="Devices:"/>
+                            <h:outputText value="#{primeGatewayDetailsController.gatewayDTO.devices.size()}"/>
+                        </p:panelGrid>
+                    </div>
+                </f:facet>
+
+                <p:column headerText="ID">
+                    <h:outputText value="#{device.id}" />
+                </p:column>
+                <p:column headerText="UID">
+                    <h:outputText value="#{device.UID}" />
+                </p:column>
+                <p:column headerText="Vendor">
+                    <h:outputText value="#{device.vendor}" />
+                </p:column>
+                <p:column headerText="Created Date">
+                    <h:outputText value="#{device.createdDate}" />
+                </p:column>
+                <p:column headerText="Status">
+                    <h:outputText value="#{device.status}" />
+                </p:column>
+                <p:column exportable="false">
+                    <p:commandButton class="ui-button-danger rounded-button" icon="pi pi-trash" oncomplete="PF('deleteDeviceDialog').show()"
+                                     process="@this">
+                        <f:setPropertyActionListener value="#{device}" target="#{primeGatewayDetailsController.selectedDevice}"/>
+                    </p:commandButton>
+                </p:column>
+            </p:dataTable>
+
+        </h:form>
+        <h:form id="dialogs">
+            <p:confirmDialog widgetVar="deleteDeviceDialog" showEffect="fade" width="300"
+                             message="Delete this device?" header="Confirm" severity="warn">
+                <p:commandButton value="Yes" icon="pi pi-check" actionListener="#{primeGatewayDetailsController.deleteDevice}"
+                                 process="@this"
+                                 oncomplete="PF('deleteDeviceDialog').hide()" />
+                <p:commandButton value="No" type="button" styleClass="ui-button-secondary" icon="pi pi-times"
+                                 onclick="PF('deleteDeviceDialog').hide()" />
+            </p:confirmDialog>
+            <p:dialog header="Add New Device" showEffect="fade" modal="true" widgetVar="addDeviceDialog"
+                      responsive="true">
+                <p:outputPanel id="add-device-content" class="ui-fluid" style="max-width: 20rem">
+                    <div class="field">
+                        <p:outputLabel for="uid">UID</p:outputLabel>
+                        <p:inputText id="uid" value="#{primeGatewayDetailsController.newDevice.UID}" required="true" validatorMessage="Debe ser de tipo numerico">
+                            <f:validateLongRange/>
+                        </p:inputText>
+                        <p:message for="uid" style="margin: 0"/>
+                    </div>
+                    <div class="field">
+                        <p:outputLabel for="vendor">Vendor</p:outputLabel>
+                        <p:inputText id="vendor" value="#{primeGatewayDetailsController.newDevice.vendor}" required="true"/>
+                    </div>
+                    <div class="field">
+                        <p:outputLabel for="status">Status</p:outputLabel>
+                        <p:selectOneMenu id="status" value="#{primeGatewayDetailsController.newDevice.status}" required="true">
+                            <f:selectItem itemLabel="Select One" itemValue=""/>
+                            <f:selectItem itemLabel="ONLINE" itemValue="ONLINE"/>
+                            <f:selectItem itemLabel="OFFLINE" itemValue="OFFLINE"/>
+                        </p:selectOneMenu>
+                    </div>
+                </p:outputPanel>
+                <f:facet name="footer">
+                    <p:commandButton value="Save" icon="pi pi-check" actionListener="#{primeGatewayDetailsController.addDeviceToGateway}"
+                                     process="add-device-content @this" validateClient="true" update="dialogs:add-device-content" />
+                    <p:commandButton value="Cancel" icon="pi pi-times" onclick="PF('addDeviceDialog').hide()"
+                                     class="ui-button-secondary" type="button" />
+                </f:facet>
+            </p:dialog>
+        </h:form>
+    </div>
+</h:body>
+</html>

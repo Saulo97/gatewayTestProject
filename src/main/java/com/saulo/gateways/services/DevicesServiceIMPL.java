@@ -7,6 +7,7 @@ import com.saulo.gateways.models.Gateway;
 import com.saulo.gateways.repositories.DevicesRepository;
 import com.saulo.gateways.custom_exceptions.DeviceNotFoundException;
 import com.saulo.gateways.repositories.GatewaysRepository;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

@@ -1,7 +1,9 @@
 package com.saulo.gateways.dto;
 
-import java.util.List;
+import lombok.ToString;
 
+import java.util.List;
+@ToString
 public class GatewayDTO {
     public Long id;
     public String serialNumber;

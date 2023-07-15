@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui">
+
+<h:head>
+    <title>GatewayTest</title>
+    <link rel="stylesheet" href="https://unpkg.com/primeflex@^3/primeflex.css"/>
+</h:head>
+<h:body>
+    <div class="card crud-demo">
+        <h:form id="form-gateways">
+            <p:growl id="messages" showDetail="true"/>
+            <p:toolbar>
+                <p:toolbarGroup align="left">
+                    <p:commandButton value="New" icon="pi pi-plus" actionListener="#{primeGatewaysController.openNew}"
+                                    styleClass="ui-button-success" style="margin-right: .5rem"
+                                    oncomplete="PF('addGatewayDialog').show()" update=":dialogs:add-gateway-content">
+                    </p:commandButton>
+                </p:toolbarGroup>
+            </p:toolbar>
+            <p:dataTable id="dt-gateways" widgetVar="dtGateways" var="gateway" value="#{primeGatewaysController.gatewayList}"
+                         reflow="true" styleClass="table" selection="#{primeGatewaysController.selectedGateway}"
+                         >
+                <f:facet name="header">
+                    <div class="table-header">
+                        <span style="font-weight: bold">GATEWAYS LIST</span>
+                    </div>
+                </f:facet>
+
+                <p:column headerText="ID">
+                    <h:outputText value="#{gateway.id}" />
+                </p:column>
+                <p:column headerText="Serial Number">
+                    <h:outputText value="#{gateway.serialNumber}" />
+                </p:column>
+                <p:column headerText="Name">
+                    <h:outputText value="#{gateway.name}" />
+                </p:column>
+                <p:column headerText="IP">
+                    <h:outputText value="#{gateway.IPv4}" />
+                </p:column>
+                <p:column exportable="false">
+                    <p:linkButton outcome="gatewayDetail" icon="pi pi-list"
+                                  styleClass="rounded-button ui-button-success" style="margin: 0.5rem " includeViewParams="true">
+                        <f:param name="gatewayId" value="#{gateway.id}"/>
+
+                    </p:linkButton>
+                    <p:commandButton class="ui-button-danger rounded-button" icon="pi pi-trash" oncomplete="PF('deleteGatewayDialog').show()"
+                                     process="@this">
+                        <f:setPropertyActionListener value="#{gateway}" target="#{primeGatewaysController.gatewayDTO}"/>
+                    </p:commandButton>
+                </p:column>
+
+            </p:dataTable>
+        </h:form>
+        <h:form id="dialogs">
+            <p:dialog header="Add New Gateway" showEffect="fade" modal="true" widgetVar="addGatewayDialog"
+                      responsive="true">
+                <p:outputPanel id="add-gateway-content" class="ui-fluid" style="max-width: 30rem">
+                        <div class="field">
+                            <p:outputLabel for="name">Name</p:outputLabel>
+                            <p:inputText id="name" value="#{primeGatewaysController.selectedGateway.name}" required="true"/>
+                        </div>
+                        <div class="field">
+                            <p:outputLabel for="serialNumber">Serial Number</p:outputLabel>
+                            <p:inputText id="serialNumber" value="#{primeGatewaysController.selectedGateway.serialNumber}" required="true"/>
+                        </div>
+                    <div class="field">
+                        <p:outputLabel for="ipv4">IPv4</p:outputLabel>
+                        <p:inputText id="ipv4" value="#{primeGatewaysController.selectedGateway.IPv4}" validatorMessage="IP no valido">
+                            <f:validateRegex pattern="(([0-9]|[1-9][0-9]|1[0-9][0-9]|2[0-4][0-9]|25[0-5])\.){3}([0-9]|[1-9][0-9]|1[0-9][0-9]|2[0-4][0-9]|25[0-5])"/>
+                        </p:inputText>
+                        <p:message for="ipv4" style="margin: 0"/>
+                    </div>
+                </p:outputPanel>
+
+                <f:facet name="footer">
+                    <p:commandButton value="Save" icon="pi pi-check" actionListener="#{primeGatewaysController.saveGateway}"
+                                     process="add-gateway-content @this" validateClient="true" update="dialogs:add-gateway-content"/>
+                    <p:commandButton value="Cancel" icon="pi pi-times" onclick="PF('addGatewayDialog').hide()"
+                                     class="ui-button-secondary" type="button" />
+                </f:facet>
+            </p:dialog>
+            <p:confirmDialog widgetVar="deleteGatewayDialog" showEffect="fade" width="300"
+                             message="Delete this gateway?" header="Confirm" severity="warn">
+                <p:commandButton value="Yes" icon="pi pi-check" actionListener="#{primeGatewaysController.deleteGateway}"
+                                 process="@this"
+                                 oncomplete="PF('deleteGatewayDialog').hide()" />
+                <p:commandButton value="No" type="button" styleClass="ui-button-secondary" icon="pi pi-times"
+                                 onclick="PF('deleteGatewayDialog').hide()" />
+            </p:confirmDialog>
+        </h:form>
+    </div>
+</h:body>
+</html>
