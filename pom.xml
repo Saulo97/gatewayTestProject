@@ -15,7 +15,7 @@
 	<description>gateways</description>
 	<properties>
 		<java.version>17</java.version>
-		<joinfaces.version>5.1.0</joinfaces.version>
+		<joinfaces.version>5.2.1</joinfaces.version>
 	</properties>
 	<dependencies>
 		<dependency>
@@ -49,6 +49,7 @@
 		<dependency>
 			<groupId>org.joinfaces</groupId>
 			<artifactId>faces-spring-boot-starter</artifactId>
+			<version>5.1.0</version>
 		</dependency>
 	</dependencies>
 
